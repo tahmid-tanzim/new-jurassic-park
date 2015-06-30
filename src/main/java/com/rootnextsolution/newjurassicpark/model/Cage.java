@@ -54,7 +54,7 @@ public class Cage {
         return powerStatus;
     }
 
-    public void setPowerStatus(PowerStatus powerStatus) throws Exception{
+    public void setPowerStatus(PowerStatus powerStatus) throws Exception {
         if(powerStatus == PowerStatus.DOWN && dinosaurs.size() > 0){
             throw new Exception("Sorry! This Cage contais Dinosaur. Can not power DOWN.");
         }
