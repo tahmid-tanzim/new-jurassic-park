@@ -10,19 +10,15 @@ public class Dinosaur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)	
     private Integer id;
+    @Column(nullable = false)
     private String name;
     @ManyToOne(targetEntity = Cage.class)
     private Cage cage;
-    @ManyToOne(targetEntity = Species.class)
+    @ManyToOne(targetEntity = Species.class, optional = false)
     private Species species;
 
- 	public Dinosaur() {
+    public Dinosaur() {
 
-    }
-
-    public Dinosaur(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -45,7 +41,18 @@ public class Dinosaur {
         return cage;
     }
 
-    public void setCage(Cage cage) {
+    public void setCage(Cage cage) throws Exception{
+        if(cage.getPowerStatus() == PowerStatus.DOWN){
+            throw new Exception("Sorry! This cage is power DOWN.");
+        }
+        if(cage.getMaximumCapacity() <= cage.getDinosaurContained()){
+            throw new Exception("Sorry! Cage cannot contain more than " + cage.getMaximumCapacity() + " dinosaurs.");
+        }
+        if(cage.getDinosaurs().size() > 0 && (cage.getDinosaurs().get(0).getSpecies().getDinosaurType() == DinosaurType.Carnivores || this.species.getDinosaurType() == DinosaurType.Carnivores)){
+            if(cage.getDinosaurs().get(0).species != this.species){
+                throw new Exception("Sorry! Dinosaur species doesnot match.");
+            }
+        }
         this.cage = cage;
     }
 

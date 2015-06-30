@@ -10,13 +10,13 @@ import javax.persistence.Id;
  */
 @Entity
 public class Species {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)	
     private Integer id;
     private String name;
     private DinosaurType dinosaurType;
 
- 	public Species(){
+    public Species(){
 
     }
 
