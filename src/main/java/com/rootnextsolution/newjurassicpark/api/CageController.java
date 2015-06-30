@@ -55,7 +55,7 @@ public class CageController {
      }
  
     @RequestMapping(value = "{id}", method = RequestMethod.PUT, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Cage updateFromJson(@PathVariable(value = "id") Integer id, @RequestBody(required = true) String jsonString) throws ParseException, Exception {
+    public Cage update(@PathVariable(value = "id") Integer id, @RequestBody(required = true) String jsonString) throws ParseException, Exception {
         Cage cage = cageRepository.findOne(id);
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);
         Integer maximumCapacity = (Integer) jsonObject.get("maximumCapacity");

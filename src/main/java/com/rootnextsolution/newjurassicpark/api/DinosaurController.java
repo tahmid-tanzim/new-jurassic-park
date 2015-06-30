@@ -25,7 +25,7 @@ public class DinosaurController {
     CageRepository cageRepository;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public Iterable<Dinosaur> list(){
+    public Iterable<Dinosaur> get(){
         return dinosaurRepository.findAll();
     }
 
